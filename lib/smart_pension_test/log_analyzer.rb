@@ -28,7 +28,13 @@ module SmartPensionTest
       return [] if parsed_log_data.empty?
 
       parsed_log_data.each_with_object([]) do |log_item, list|
-        list << { path: log_item.path, visit_count: 1 }
+        path_in_list = list.detect { |item| item[:path] == log_item.path }
+
+        if path_in_list
+          list[list.index(path_in_list)][:visit_count] += 1
+        else
+          list << { path: log_item.path, visit_count: 1 }
+        end
       end
     end
   end
