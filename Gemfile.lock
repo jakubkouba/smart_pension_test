@@ -64,11 +64,12 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
-  byebug
-  guard-rspec
+  byebug (~> 11.0)
+  guard-rspec (~> 4.7)
   rake (~> 10.0)
   rspec (~> 3.0)
   smart_pension_test!
+  thor (~> 0.20)
 
 BUNDLED WITH
    2.0.1
