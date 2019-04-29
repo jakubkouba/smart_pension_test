@@ -98,8 +98,8 @@ RSpec.describe SmartPensionTest::LogAnalyzer do
       it 'has two items each with visit count 1' do
         expect(most_unique_page_views).to match(
           [
-            { path: "a", visit_count: 1 },
-            { path: "b", visit_count: 1 }
+            { path: "b", visit_count: 1 },
+            { path: "a", visit_count: 1 }
           ]
         )
       end
@@ -128,6 +128,26 @@ RSpec.describe SmartPensionTest::LogAnalyzer do
 
       it 'has one item' do
         expect(most_unique_page_views).to match([{ path: "a", visit_count: 1 }])
+      end
+    end
+
+    context 'log contains two items with same path and different ip address and two with same path but different ip address' do
+      let(:parsed_log_data) do
+        [
+          double('LogItem', path: 'b', ip_address: '1'),
+          double('LogItem', path: 'b', ip_address: '1'),
+          double('LogItem', path: 'a', ip_address: '2'),
+          double('LogItem', path: 'a', ip_address: '1')
+        ]
+      end
+
+      it 'has two sorted items by visit count' do
+        expect(most_unique_page_views).to match(
+          [
+            { path: 'a', visit_count: 2 },
+            { path: 'b', visit_count: 1 }
+          ]
+        )
       end
     end
   end

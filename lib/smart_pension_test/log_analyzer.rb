@@ -30,14 +30,15 @@ module SmartPensionTest
       return [] if parsed_log_data.empty?
 
       ips_by_path = parsed_log_data.each_with_object({}) do |log_item, paths_with_ips|
-        if paths_with_ips[log_item.path]
-          paths_with_ips[log_item.path].add(log_item.ip_address)
-        else
-          paths_with_ips[log_item.path] = Set.new([log_item.ip_address])
-        end
+        paths_with_ips[log_item.path] ||= Set.new([log_item.ip_address])
+        paths_with_ips[log_item.path].add(log_item.ip_address) if paths_with_ips[log_item.path]
       end
 
-      ips_by_path.map { |path, ips| { path: path, visit_count: ips.count } }
+      path_with_unique_visits = ips_by_path.map do |path, ips|
+        { path: path, visit_count: ips.count }
+      end
+
+      path_with_unique_visits.sort_by { |item| item[:visit_count] }.reverse
     end
   end
 end
