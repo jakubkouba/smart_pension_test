@@ -78,6 +78,14 @@ RSpec.describe SmartPensionTest::LogAnalyzer do
     it 'is a collection' do
       expect(most_unique_page_views).to be_kind_of Enumerable
     end
+
+    context 'when log contains one item' do
+      let(:parsed_log_data) { [double('LogItem', path: 'a', ip_address: 1)] }
+
+      it 'has one item with visit count 1' do
+        expect(most_unique_page_views).to match([path: 'a', visit_count: 1])
+      end
+    end
   end
 
 end

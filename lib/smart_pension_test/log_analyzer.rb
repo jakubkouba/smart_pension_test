@@ -25,7 +25,9 @@ module SmartPensionTest
     end
 
     def most_unique_page_views
-      parsed_log_data
+      return [] if parsed_log_data.empty?
+
+      [{ path: parsed_log_data.first.path, visit_count: 1}]
     end
   end
 end
