@@ -27,7 +27,9 @@ module SmartPensionTest
     def most_unique_page_views
       return [] if parsed_log_data.empty?
 
-      [{ path: parsed_log_data.first.path, visit_count: 1}]
+      parsed_log_data.each_with_object([]) do |log_item, list|
+        list << { path: log_item.path, visit_count: 1 }
+      end
     end
   end
 end
