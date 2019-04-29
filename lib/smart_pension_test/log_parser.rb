@@ -1,3 +1,5 @@
+require 'ostruct'
+
 module SmartPensionTest
   class LogParser
 
@@ -8,7 +10,10 @@ module SmartPensionTest
     end
 
     def data
-      File.readlines(file, chomp: true)
+      File.readlines(file, chomp: true).map do |log_item|
+        path, ip_address = log_item.split(' ')
+        OpenStruct.new(path: path, ip_address: ip_address)
+      end
     end
   end
 end
