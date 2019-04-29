@@ -21,11 +21,12 @@ Gem::Specification.new do |spec|
   spec.executables   = ["sp_log_parser"]
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency "thor", "~> 0.20"
+
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "guard-rspec", "~> 4.7"
   spec.add_development_dependency "byebug", "~> 11.0"
-  spec.add_development_dependency "thor", "~> 0.20"
 
 end
