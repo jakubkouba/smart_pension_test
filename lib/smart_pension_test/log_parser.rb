@@ -4,5 +4,9 @@ module SmartPensionTest
     def initialize(file)
       @file = file
     end
+
+    def data
+      []
+    end
   end
 end
