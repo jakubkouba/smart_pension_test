@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "smart_pension_test"
+
+log_file = ARGV.first
+
+File.open(log_file).each do |log_item|
+  puts log_item
+end
