@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "thor", "~> 0.20"
+  spec.add_runtime_dependency "terminal-table", "~> 1.8"
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"

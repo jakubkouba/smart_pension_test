@@ -3,6 +3,7 @@
 require "bundler/setup"
 require "smart_pension_test"
 require "thor"
+require "terminal-table"
 
 class SmartPensionTestCLI < Thor
 
@@ -17,15 +18,33 @@ class SmartPensionTestCLI < Thor
     log_analyzer = SmartPensionTest::LogAnalyzer.new(log_parser.data)
 
     if options[:most_views]
+      rows = []
       log_analyzer.most_page_views.each do |log_item|
-        puts "#{log_item[:path]} #{log_item[:visit_count]} views"
+        rows << [log_item[:path], log_item[:visit_count]]
       end
+
+      table_options = {
+        title:    'Most Page Views',
+        headings: ['Page', 'Views Count'],
+        rows:     rows
+      }
+
+      puts Terminal::Table.new(table_options)
     end
 
     if options[:most_unique_views]
+      rows = []
       log_analyzer.most_unique_page_views.each do |log_item|
-        puts "#{log_item[:path]} #{log_item[:visit_count]} views"
+        rows << [log_item[:path], log_item[:visit_count]]
       end
+
+      table_options = {
+        title:    'Most Unique Page Views',
+        headings: ['Page', 'Views Count'],
+        rows:     rows
+      }
+
+      puts Terminal::Table.new(table_options)
     end
   end
 
