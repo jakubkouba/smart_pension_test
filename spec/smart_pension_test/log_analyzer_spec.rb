@@ -117,6 +117,19 @@ RSpec.describe SmartPensionTest::LogAnalyzer do
         expect(most_unique_page_views).to match([{ path: "a", visit_count: 2 }])
       end
     end
+
+    context 'when log contains two same items' do
+      let(:parsed_log_data) do
+        [
+          double('LogItem', path: 'a', ip_address: '1'),
+          double('LogItem', path: 'a', ip_address: '1')
+        ]
+      end
+
+      it 'has one item' do
+        expect(most_unique_page_views).to match([{ path: "a", visit_count: 1 }])
+      end
+    end
   end
 
 end

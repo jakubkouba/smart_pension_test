@@ -1,4 +1,6 @@
+require 'set'
 require 'byebug'
+
 module SmartPensionTest
   class LogAnalyzer
 
@@ -27,15 +29,15 @@ module SmartPensionTest
     def most_unique_page_views
       return [] if parsed_log_data.empty?
 
-      parsed_log_data.each_with_object([]) do |log_item, list|
-        path_in_list = list.detect { |item| item[:path] == log_item.path }
-
-        if path_in_list
-          list[list.index(path_in_list)][:visit_count] += 1
+      ips_by_path = parsed_log_data.each_with_object({}) do |log_item, paths_with_ips|
+        if paths_with_ips[log_item.path]
+          paths_with_ips[log_item.path].add(log_item.ip_address)
         else
-          list << { path: log_item.path, visit_count: 1 }
+          paths_with_ips[log_item.path] = Set.new([log_item.ip_address])
         end
       end
+
+      ips_by_path.map { |path, ips| { path: path, visit_count: ips.count } }
     end
   end
 end
