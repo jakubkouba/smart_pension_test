@@ -23,5 +23,9 @@ module SmartPensionTest
 
       list.sort_by { |item| item[:visit_count] }.reverse
     end
+
+    def most_unique_page_views
+      parsed_log_data
+    end
   end
 end

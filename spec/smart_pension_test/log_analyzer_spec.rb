@@ -72,4 +72,12 @@ RSpec.describe SmartPensionTest::LogAnalyzer do
     end
   end
 
+  describe '#most_unique_page_views' do
+    subject(:most_unique_page_views) { log_analyzer.most_unique_page_views }
+
+    it 'is a collection' do
+      expect(most_unique_page_views).to be_kind_of Enumerable
+    end
+  end
+
 end
