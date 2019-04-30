@@ -1,5 +1,4 @@
 require 'set'
-require 'byebug'
 
 module SmartPensionTest
   class LogAnalyzer
