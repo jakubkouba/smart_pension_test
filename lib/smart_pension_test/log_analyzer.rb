@@ -29,11 +29,11 @@ module SmartPensionTest
         paths_with_ips[log_item.path].add(log_item.ip_address) if paths_with_ips[log_item.path]
       end
 
-      path_with_unique_visits = ips_by_path.map do |path, ips|
+      unique_visits = ips_by_path.map do |path, ips|
         { path: path, visit_count: ips.count }
       end
 
-      path_with_unique_visits.sort_by { |item| item[:visit_count] }.reverse
+      unique_visits.sort_by { |item| item[:visit_count] }.reverse
     end
   end
 end
