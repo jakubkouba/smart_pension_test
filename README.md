@@ -4,6 +4,10 @@
 
 Checkout the repository
 
+    $ git clone git@github.com:wizard2nd/smart_pension_test.git
+    
+Than go inside the project
+
     $ cd smart_pension_test
     
 Install dependencies:
